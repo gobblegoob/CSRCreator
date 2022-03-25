@@ -7,7 +7,6 @@
 
 '''
 from OpenSSL import crypto
-#import openpyxl
 import os, datetime
 import colorama
 from colorama import Fore, Back, Style
@@ -96,6 +95,10 @@ def create_csr(csrpath):
     else:
         f = open(csrpath, "w")
         csrdump = crypto.dump_certificate_request(crypto.FILETYPE_PEM, req)
+        # csrdump is a byte string with with characters that will corrupt the cert file.
+        # Decode to UTF-8 to strip out characters.
+        # The byte string must also be inlcuded in teh CERT_LIST dictionary
+        # to be passed to certout.py so a pkcs12 can be created.
         cd = csrdump.decode('UTF-8')
         f.write(cd)
         f.close()
@@ -132,8 +135,11 @@ def csr_hosts():
 if __name__ == '__main__':
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
+
+    # Execute CSR Creation tasks
     csr_hosts()
-    print('Done! \nLets grab a \xf0\x9f\x8d\x95!')
+
+    print('CSR\'s created! \nLets grab a \xf0\x9f\x8d\x95!')
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
 
