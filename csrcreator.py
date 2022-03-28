@@ -132,6 +132,13 @@ def csr_hosts():
     return
 
 
+def output_csr_list():
+    csr_json_file = 'csr_list_' + str(d) + '.json'
+    csr_json_data  = json.dumps(CERT_LIST)
+    with open(csr_json_file, 'w') as csrfile:
+        csrfile.write(csr_json_data)
+
+
 if __name__ == '__main__':
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
     print(f'{Fore.BLUE}{Style.BRIGHT}=-=' * 45)
@@ -145,6 +152,7 @@ if __name__ == '__main__':
 
     # Print everything ou just did!
     print('~!~!' * 30 )
-    print(f'{Back.BLACK}{Fore.BLUE}{Style.BRIGHT}\nThe following CSRs and Keys were created:')
-    print(json.dumps(CERT_LIST, sort_keys = False, indent = 4))
+    # print(f'{Back.BLACK}{Fore.BLUE}{Style.BRIGHT}\nThe following CSRs and Keys were created:')
+    # print(json.dumps(CERT_LIST, sort_keys = False, indent = 4))
+    output_csr_list()
     print('~!~!' * 30 )

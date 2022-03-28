@@ -21,9 +21,9 @@ HOME_DIR = os.getcwd()
 
 CERT_LIST = [    
     {
-        "hostname": "",
-        "keyfile": "",
-        "csrfile": ""
+        "hostname": "fs-02.host.com",
+        "keyfile": "fs-02.host.com_2022-03-25.key",
+        "csrfile": "fs-02.host.com_2022-03-25.csr"
     }
 ]
 
@@ -35,21 +35,27 @@ def generate_pkcs12(host, cert_pem, pkey):
 
     This command will take the key and the signed cert and output a pkcs12 file that can be imported
 
-    Returns a class pkcs12_bin.  How do i get that into a file i can import?
+    Returns a class pkcs12_bin.
     '''
     try:
-        p12 = PKCS12()
         friendly_name = host + '.pfx'
-        pem_bytes= file_bytes(cert_pem)
-        pkey_bytes = file_bytes(pkey)
-        p12.set_certificate(load_certificate(FILETYPE_PEM, pem_bytes))
-        p12.set_privatekey(load_privatekey(FILETYPE_PEM, pkey_bytes))
+        if validate_base64_cert(cert_pem) == True:
+            p12 = PKCS12()
+            pem_bytes= file_bytes(cert_pem)
+            pkey_bytes = file_bytes(pkey)
+            p12.set_certificate(load_certificate(FILETYPE_PEM, pem_bytes))
+            p12.set_privatekey(load_privatekey(FILETYPE_PEM, pkey_bytes))
 
-        passphrase = b'password123'
+            # Certificate encryption passphrase
+            passphrase = b'password123'
 
-        pkcs12_bin = p12.export(passphrase=passphrase)
+            pkcs12_bin = p12.export(passphrase=passphrase)
+            write_pks12(friendly_name, pkcs12_bin)
+            return pkcs12_bin
 
-        return pkcs12_bin
+        else:
+            print(f'{Fore.RED}{Style.BRIGHT}Unable to create certificate {friendly_name}')
+            return
 
     except Exception as e:
         print('-' * 50)
@@ -81,8 +87,28 @@ def file_bytes(input):
         f.close()
         return file_bytes
     except  Exception as e:
-        print('Error at file_bytes().  Unable to read file')
+        print(f'{Fore.RED}Error at file_bytes().  Unable to read file')
         print(e)
+
+
+
+def validate_base64_cert(cert):
+    # Conversion to pkcs12 requires signed x509 cert in Base64!
+    # Check first line of signed cert file to make sure it contains
+    # The correct Base64 string will begin with -----BEGIN CERTIFICATE-----
+    # Improve this check if able
+    try:
+        with open(cert, 'r') as certfile:
+            t = certfile.read()
+        b64_text = t[:27]
+        if (b64_text == '-----BEGIN CERTIFICATE-----'):
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f'{Fore.RED}Error validating base 64 x509 certificate')
+        print(e)
+
 
 
 def validate_certfiles():
@@ -164,7 +190,7 @@ def parse_certs(CERT_LIST):
                 # Will have issues if there is more than one .cer file!
                 cert = get_certfilename()
                 pfx = generate_pkcs12(host, cert, pk)
-                write_pks12(pfx_name, pfx)
+                # write_pks12(pfx_name, pfx)
 
             os.chdir('..')
             i += 1
@@ -174,4 +200,5 @@ def parse_certs(CERT_LIST):
         print(f'{Fore.RED}There is no certificate list.  Exiting.')
         quit()
 
-parse_certs(CERT_LIST)
+if __name__ == '__main__':
+    parse_certs(CERT_LIST)
