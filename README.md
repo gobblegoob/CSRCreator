@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `gobblegoob`, `CSRCreator`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `CSR Creator`, `project_description`-->
 This project was initially created to reduce clicking and losing files on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
@@ -115,10 +115,8 @@ When you receive your signed Base 64 certificates, place them each in their resp
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the project.
-
-Populate 
-
+Clone the repo.  Pick at the script and figure out how to add your hostnames, etc.  I'll make it easier soon!
+<!-->
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -137,7 +135,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-
+-->
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -157,10 +155,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Use Excel checklist to import host list
+- [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
+
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
 
