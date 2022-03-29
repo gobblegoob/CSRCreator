@@ -151,9 +151,9 @@ This is an example of how to list things you need to use the software and how to
 ## Usage
 
 Launch certmanager.py.  You will be granted with a text based interface that will guide you through the process.
-<br\>
-<img src="images/logo.png" alt="Logo" width="80" height="80">
-<br\>
+
+<img src="images/mainmenu.PNG" alt="Main Menu">
+
 <h3>Set Certificate Attributes</h3>
 You can set certificate attributes.  If you wish to modify the default set, edit the csr_data dictionary in csrcreator.py.  You also can't directly edit the CN or Key attributes.  The key is defaulted to 4096.
 
