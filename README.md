@@ -87,7 +87,7 @@
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `gobblegoob`, `CSRCreator`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `CSR Creator`, `project_description`-->
 This project was initially created to reduce clicking and losing files on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
 
-Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member. 
+Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A.
 
 The script will read the hostnames from Column A and create a directory for each host where the certificate keys and CSRs will be kept.
 
@@ -115,7 +115,13 @@ When you receive your signed Base 64 certificates, place them each in their resp
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the repo.  Pick at the script and figure out how to add your hostnames, etc.  I'll make it easier soon!
+Clone the repo.  Install any required libraries you may be missing.
+
+Dependencies:
+colorama==0.4.4
+pyOpenSSL==22.0.0
+openpyxl==3.0.9
+
 <!-->
 ### Prerequisites
 
@@ -141,22 +147,49 @@ This is an example of how to list things you need to use the software and how to
 
 
 <!-- USAGE EXAMPLES -->
-<!--
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Launch certmanager.py.  You will be granted with a text based interface that will guide you through the process.
+<br\>
+<img src="images/logo.png" alt="Logo" width="80" height="80">
+<br\>
+<h3>Set Certificate Attributes</h3>
+You can set certificate attributes.  If you wish to modify the default set, edit the csr_data dictionary in csrcreator.py.  You also can't directly edit the CN or Key attributes.  The key is defaulted to 4096.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<h3>Set Source Excel Spreadsheet</h3>
+[DOES NOT WORK YET] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
+<b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program. 
+
+<h3>Generate CSR's</h3>
+Will parse your source list of hostnames and create a directory for each host.
+Each directory will hold the CSR file and the Key file.  
+<b>Important! </b>ensure that the signed PEM files are Base 64 encoded.
+<i>Note:</i> The script will create a json file that will store path and hostname data to account for the time taken to get the certificates signed.  Please don't delete this file till you no longer need it.  It is saved in the root path for the application and will be named csr_list_[DATE].json
+
+<h3>Create PKCS12 certificates</h3>
+When you have your signed PEM files in Base 64 format, place them in the associated host directory with the keys.  This is crucial or the script will fail to create your PKCS12 files.
+Each created directory will be parsed and PKCS12 files will be created for each host in their respective directories.  
+
+You will receive output that will let you know if there are any errors.  
+
+You are now ready to install the certificiates where needed.
+
+<h3>Quit</h3>
+I'm not sure what this does, but I hope it's not dangerous.
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
--->
+
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Use Excel checklist to import host list
+- [x] Use Excel checklist to import host list
 - [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
+- [ ] Allow a user to set their own source spreadsheet
 
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
