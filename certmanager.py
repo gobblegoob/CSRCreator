@@ -42,7 +42,7 @@ def script_start():
     '=-' * 50,
     '\n')
     print(f'{Back.BLACK}{Style.BRIGHT}{Fore.CYAN}CSR Creator',
-    '\n\n - Batch create CSR\'s and PKCS12 files for import into your\n'
+    '\n\n - Batch create CSR\'s and PKCS12 files for import.\n'
     )
 
 
