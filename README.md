@@ -190,7 +190,8 @@ I'm not sure what this does, but I hope it's not dangerous.
 - [x] Use Excel checklist to import host list
 - [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
 - [ ] Allow a user to set their own source spreadsheet
-
+- [ ] Allow for the addition of SAN fields and other attributes in CSR
+- [ ] GUI
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
 
