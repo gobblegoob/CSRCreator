@@ -42,7 +42,9 @@ class CSRCreator():
 
 
     def set_host_list(self, host_list):
-        # Takes a list as input to set the host list
+        # Takes a dictionary as input to set the host list
+        # the dictionary contains a hostname for cn fields
+        # and an IP address for the SAN field.
         self.HOST_LIST = host_list
 
     def set_cert_attributes(self, attributes):
@@ -119,13 +121,29 @@ class CSRCreator():
         directory structure and call all functions to create the csr's.
         '''
         for h in self.HOST_LIST:
-            self.csr_data['cn'] = h
-            
+            # SNA Identity Certs contain CN and two SANS.
+            # SAN1 contains the hostname which matches the CN
+            # SAN2 is the IP address of the appliance
+            self.csr_data['cn'] = h['hostname']
+            san1 = h['hostname']
+
+            if h['ip'] is not None:
+                san2 = h['ip']
+            else:
+                san2 = ''
+
+            print(
+                'Common Name ' + self.csr_data['cn'],
+                '\nSubject Alternative Name ' + san1,
+                '\nSubject Alternative Name ' + san2,
+                '\n\n'
+            )
+            '''
             # create new dir
             os.chdir(self.HOMEDIR)
             print(os.getcwd())
-            self.create_dir(h)
-            os.chdir(h)
+            self.create_dir(h['hostname'])
+            os.chdir(h['hostname'])
             keypath = os.getcwd() + '\\' + h + '_' + str(d) + '.key'
             print(f'Keypath is: {keypath}')
     
@@ -136,6 +154,7 @@ class CSRCreator():
             csrpath = os.getcwd() + '\\' + h + '_' + str(d) + '.csr'
             self.create_csr(csrpath)
             self.CERT_LIST.append({'hostname': h, 'keyfile': keypath, 'csrfile': csrpath})
+            '''
         return
 
 
