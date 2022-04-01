@@ -85,7 +85,7 @@
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `gobblegoob`, `CSRCreator`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `CSR Creator`, `project_description`-->
-This project was initially created to reduce clicking and losing files on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
+This project was initially created to reduce clicking on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
 
 Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A.
 
@@ -190,7 +190,8 @@ I'm not sure what this does, but I hope it's not dangerous.
 - [x] Use Excel checklist to import host list
 - [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
 - [ ] Allow a user to set their own source spreadsheet
-
+- [ ] Allow for the addition of SAN fields and other attributes in CSR
+- [ ] GUI
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
 

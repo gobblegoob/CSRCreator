@@ -50,7 +50,7 @@ def script_start():
     '=-' * 50,
     '\n')
     print(f'{Back.BLACK}{Style.BRIGHT}{Fore.CYAN}CSR Creator',
-    '\n\n - Batch create CSR\'s and PKCS12 files for import into your\n'
+    '\n\n - Batch create CSR\'s and PKCS12 files for import.\n'
     )
 
 
@@ -196,3 +196,22 @@ if __name__ == '__main__':
     script_start()
     print_menu()
     navigate_menu()
+<<<<<<< HEAD
+=======
+
+    
+    '''
+    cm.get_host_list('SNA Certificate Checklist.xlsx')
+
+    # Create the CSRs
+    csrc = CSRCreator()
+    csrc.set_host_list(cm.HOST_LIST)
+    csrc.csr_hosts()
+    csrc.output_csr_list()
+
+    # Create the pkcs12 files
+
+    '''
+
+    
+>>>>>>> 696049dcbff183c5ce6eb951d4446a20876946c7
