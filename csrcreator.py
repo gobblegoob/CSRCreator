@@ -86,7 +86,7 @@ class CSRCreator():
             f.close()
             print(f'{Fore.GREEN}{Style.BRIGHT} - Keyfile Generated! {Fore.CYAN}{keypath}')
 
-    def create_csr(self, csrpath):
+    def create_csr(self, csrpath, subjectAltName):
         req = crypto.X509Req()
         req.get_subject().CN = self.csr_data['cn']
         req.get_subject().C = self.csr_data['c']
@@ -94,6 +94,12 @@ class CSRCreator():
         req.get_subject().L = self.csr_data['l']
         req.get_subject().O = self.csr_data['o']
         req.get_subject().OU = self.csr_data['ou']
+
+        # Set subject alternative names
+        req.add_extensions([crypto.X509Extension(
+            b'subjectAltName', False,
+            subjectAltName.encode('ascii'))])
+
         req.set_pubkey(self.key)
         req.sign(self.key, "sha256")
     
@@ -114,6 +120,23 @@ class CSRCreator():
             print(f"CSR Created: {csrpath}")
         return
 
+    def cert_request(self, hostname, subjectAltName):
+        # create new dir
+        os.chdir(self.HOMEDIR)
+        print(os.getcwd())
+        self.create_dir(hostname)
+        os.chdir(hostname)
+        keypath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.key'
+        print(f'Keypath is: {keypath}')
+    
+        # Generate Key
+        self.generatekey(keypath)
+    
+        # Create CSR
+        csrpath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.csr'
+        self.create_csr(csrpath, subjectAltName)
+        self.CERT_LIST.append({'hostname': hostname, 'keyfile': keypath, 'csrfile': csrpath})
+
 
     def csr_hosts(self):
         '''
@@ -128,33 +151,17 @@ class CSRCreator():
             san1 = h['hostname']
 
             if h['ip'] is not None:
+                # If IP address is present in file, 
                 san2 = h['ip']
-            else:
-                san2 = ''
+                subjectAltName = f'DNS:{san1},IP:{san2}'
 
-            print(
-                'Common Name ' + self.csr_data['cn'],
-                '\nSubject Alternative Name ' + san1,
-                '\nSubject Alternative Name ' + san2,
-                '\n\n'
-            )
-            '''
-            # create new dir
-            os.chdir(self.HOMEDIR)
-            print(os.getcwd())
-            self.create_dir(h['hostname'])
-            os.chdir(h['hostname'])
-            keypath = os.getcwd() + '\\' + h + '_' + str(d) + '.key'
-            print(f'Keypath is: {keypath}')
-    
-            # Generate Key
-            self.generatekey(keypath)
-    
-            # Create CSR
-            csrpath = os.getcwd() + '\\' + h + '_' + str(d) + '.csr'
-            self.create_csr(csrpath)
-            self.CERT_LIST.append({'hostname': h, 'keyfile': keypath, 'csrfile': csrpath})
-            '''
+                self.cert_request(h['hostname'], subjectAltName)
+
+            else:
+                # If ip address field is blank, don't include second SAN
+                subjectAltName = f'DNS:{san1}'
+                self.cert_request(h['hostname'], subjectAltName)
+                    
         return
 
 
