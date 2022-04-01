@@ -89,6 +89,8 @@ This project was initially created to reduce clicking on large Cisco SNA deploym
 
 Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A or B.  SNA's identity certs are generated with a SAN field containing the DNS name of the appliance and a SAN field with the IP Address of the appliance.
 
+<image>
+
 The script will read the hostnames from Column A and create a directory for each host where the certificate keys and CSRs will be kept.
 
 When you receive your signed Base 64 certificates, place them each in their respective directory and run pfxcreator.py to create your pfx files.  You must have a valid Base 64 PEM as well as your key file in the hosts directory for this to work.  The pfx files will be created in their respective directories.
@@ -160,6 +162,8 @@ You can set certificate attributes.  If you wish to modify the default set, edit
 <h3>Set Source Excel Spreadsheet</h3>
 [COMING SOON] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
 <b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program. 
+<img src="images/cert spreadsheet.PNG" alt="Source Spreadsheet">
+
 
 <h3>Generate CSR's</h3>
 Will parse your source list of hostnames and create a directory for each host.
