@@ -87,7 +87,7 @@
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `gobblegoob`, `CSRCreator`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `CSR Creator`, `project_description`-->
 This project was initially created to reduce clicking on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
 
-Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A.
+Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A or B.  SNA's identity certs are generated with a SAN field containing the DNS name of the appliance and a SAN field with the IP Address of the appliance.
 
 The script will read the hostnames from Column A and create a directory for each host where the certificate keys and CSRs will be kept.
 
@@ -118,9 +118,9 @@ When you receive your signed Base 64 certificates, place them each in their resp
 Clone the repo.  Install any required libraries you may be missing.
 
 Dependencies:
-colorama==0.4.4
-pyOpenSSL==22.0.0
-openpyxl==3.0.9
+ - colorama==0.4.4
+ - pyOpenSSL==22.0.0
+ - openpyxl==3.0.9
 
 <!-->
 ### Prerequisites
@@ -158,7 +158,7 @@ Launch certmanager.py.  You will be granted with a text based interface that wil
 You can set certificate attributes.  If you wish to modify the default set, edit the csr_data dictionary in csrcreator.py.  You also can't directly edit the CN or Key attributes.  The key is defaulted to 4096.
 
 <h3>Set Source Excel Spreadsheet</h3>
-[DOES NOT WORK YET] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
+[COMING SOON] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
 <b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program. 
 
 <h3>Generate CSR's</h3>
@@ -166,6 +166,11 @@ Will parse your source list of hostnames and create a directory for each host.
 Each directory will hold the CSR file and the Key file.  
 <b>Important! </b>ensure that the signed PEM files are Base 64 encoded.
 <i>Note:</i> The script will create a json file that will store path and hostname data to account for the time taken to get the certificates signed.  Please don't delete this file till you no longer need it.  It is saved in the root path for the application and will be named csr_list_[DATE].json
+
+<b>The CSR's will be created with the following fields:</b>
+ - CN: Appliance FQDN
+ - SAN: Appliance FQDN
+ - SAN: Appliance IP address
 
 <h3>Create PKCS12 certificates</h3>
 When you have your signed PEM files in Base 64 format, place them in the associated host directory with the keys.  This is crucial or the script will fail to create your PKCS12 files.
@@ -190,7 +195,7 @@ I'm not sure what this does, but I hope it's not dangerous.
 - [x] Use Excel checklist to import host list
 - [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
 - [ ] Allow a user to set their own source spreadsheet
-- [ ] Allow for the addition of SAN fields and other attributes in CSR
+- [x] Allow for the addition of SAN fields and other attributes in CSR
 - [ ] GUI
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
