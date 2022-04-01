@@ -15,6 +15,7 @@ from csrcreator import CSRCreator
 from colorama import Fore, Style, Back
 import openpyxl
 import os
+import json
 
 class CertManager():
 
@@ -30,10 +31,17 @@ class CertManager():
         worksheet = wb.get_sheet_by_name(first_sheet)
 
         for row in range(2,worksheet.max_row+1): # first varible is the start row. 2 is to avoid the header
-            for column in "A": # add or reduce columns - Just looking in column A
+            host_dict = {}
+            for column in "AB": # add or reduce columns - Just looking in column A
                 cell_name = "{}{}".format(column, row)
-                c = worksheet[cell_name].value # the value of a specific cell
-                self.HOST_LIST.append(c)
+                if column == 'A':
+                    c = worksheet[cell_name].value
+                    host_dict = {'hostname': c}
+                elif column == 'B':
+                    c = worksheet[cell_name].value
+                    ip_dict = {'ip': c}
+                    host_dict.update(ip_dict)
+                    self.HOST_LIST.append(host_dict)
 
 
 def script_start():
@@ -172,27 +180,34 @@ def navigate_menu():
     return
 
 if __name__ == '__main__':
+    '''
+    THE FOLLOWING SECTION IS TESTING INGESTING HOST DATA FROM XML THAT INCLUDES IP ADDRESSES FOR 
+    CREATING CSR'S WITH SAN IP FIELDS
+    '''
+    os.chdir('CSRcreator')
+
+
     cm = CertManager()
     csrc = CSRCreator()
     pfxc = PFXCreator()
-    
+   
+    # RESTORE THIS SECTION
     #os.chdir('CSRCreator')
     script_start()
     print_menu()
     navigate_menu()
-
-    
-    '''
+'''
     cm.get_host_list('SNA Certificate Checklist.xlsx')
+    csrc.set_host_list(cm.HOST_LIST)
+    csrc.csr_hosts()
+
 
     # Create the CSRs
     csrc = CSRCreator()
     csrc.set_host_list(cm.HOST_LIST)
     csrc.csr_hosts()
+
+    # Creates the csr_list_.json file used to create PKCS12 files once they're signed
     csrc.output_csr_list()
 
-    # Create the pkcs12 files
-
-    '''
-
-    
+'''
