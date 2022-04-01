@@ -196,18 +196,3 @@ if __name__ == '__main__':
     script_start()
     print_menu()
     navigate_menu()
-'''
-    cm.get_host_list('SNA Certificate Checklist.xlsx')
-    csrc.set_host_list(cm.HOST_LIST)
-    csrc.csr_hosts()
-
-
-    # Create the CSRs
-    csrc = CSRCreator()
-    csrc.set_host_list(cm.HOST_LIST)
-    csrc.csr_hosts()
-
-    # Creates the csr_list_.json file used to create PKCS12 files once they're signed
-    csrc.output_csr_list()
-
-'''
