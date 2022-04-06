@@ -184,7 +184,7 @@ if __name__ == '__main__':
     THE FOLLOWING SECTION IS TESTING INGESTING HOST DATA FROM XML THAT INCLUDES IP ADDRESSES FOR 
     CREATING CSR'S WITH SAN IP FIELDS
     '''
-    os.chdir('CSRcreator')
+    # os.chdir('CSRcreator')
 
 
     cm = CertManager()
