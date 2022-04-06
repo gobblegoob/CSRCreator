@@ -196,8 +196,6 @@ if __name__ == '__main__':
     script_start()
     print_menu()
     navigate_menu()
-<<<<<<< HEAD
-=======
 
     
     '''
@@ -212,6 +210,3 @@ if __name__ == '__main__':
     # Create the pkcs12 files
 
     '''
-
-    
->>>>>>> 696049dcbff183c5ce6eb951d4446a20876946c7
