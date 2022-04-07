@@ -36,7 +36,7 @@
 <h3 align="center">CSR Creator</h3>
 
   <p align="center">
-    Need to create a bunch of CSR's for identity certificates at once?  Want the signed certs converted to pkcs12 so you can import them and go about your life?  
+    Batch create CSRs and batch merge signed certs with keys to create PKCS12 files.
     <br />
     <!--<a href="https://github.com/gobblegoob/CSRCreator"><strong>Explore the docs »</strong></a>
     <br />
@@ -120,7 +120,6 @@ When you receive your signed Base 64 certificates, place them each in their resp
 Clone the repo.  Install any required libraries you may be missing.
 
 Dependencies:
- - colorama==0.4.4
  - pyOpenSSL==22.0.0
  - openpyxl==3.0.9
 
@@ -132,18 +131,18 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-
+-->
 ### Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/gobblegoob/CSRCreator.git
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
--->
+2. Install the requirements
+  ```sh
+  pip install -r requirements.txt
+  ```
+  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -151,6 +150,10 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 
 ## Usage
+
+Modify the included xlsx file SNA Certificate Checklist.xlsx. Fill out column A with your hostnames and column B with your IP addresses.  This will populate the certificate CN and SAN Fields.
+ 
+ <img src="images/cert spreadsheet.PNG" alt="Source Spreadsheet">
 
 Launch certmanager.py.  You will be granted with a text based interface that will guide you through the process.
 
@@ -162,7 +165,6 @@ You can set certificate attributes.  If you wish to modify the default set, edit
 <h3>Set Source Excel Spreadsheet</h3>
 [COMING SOON] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
 <b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program. 
-<img src="images/cert spreadsheet.PNG" alt="Source Spreadsheet">
 
 
 <h3>Generate CSR's</h3>
