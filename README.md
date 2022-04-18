@@ -117,6 +117,8 @@ When you receive your signed Base 64 certificates, place them each in their resp
 <!-- GETTING STARTED -->
 ## Getting Started
 
+Ensure your workstation has OpenSSL installed and up-to-date.
+  
 Clone the repo.  Install any required libraries you may be missing.
 
 Dependencies:
