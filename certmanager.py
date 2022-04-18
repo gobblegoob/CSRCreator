@@ -22,6 +22,7 @@ class CertManager():
     def __init__(self):
         self.HOST_LIST = [] # List of hosts that require identity certificates
         self.CERT_LIST = [] # An array of dictionaries with directory and file info for the CSR's and key files
+        self.SOURCE_XML_FILE = 'SNA Certificate Checklist.xlsx'
 
     def get_host_list(self, source_file):
         # XLSX checklist file.  Column A must have hostlist in it.
@@ -123,11 +124,18 @@ def set_cert_attributes():
 
 
 def set_source_spreadsheet():
-    return
+    src_xlsx = input('Source file name: ')
+    if os.path.exists(src_xlsx):
+        cm.SOURCE_XML_FILE = src_xlsx
+        print(f'{Fore.LIGHTGREEN_EX}Source file is {src_xlsx}')
+        return
+    else:
+        print(f'{Fore.RED}Unable to set source file as {src_xlsx}')
+        return
 
 
 def generate_csrs():
-    cm.get_host_list('SNA Certificate Checklist.xlsx')
+    cm.get_host_list(cm.SOURCE_XML_FILE)
     csrc.set_host_list(cm.HOST_LIST)
     csrc.csr_hosts()
     csrc.output_csr_list()

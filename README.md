@@ -153,6 +153,17 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
+In brief: 
+1. Add your hostnames and FQDN plus server IP addresses to the SNA Certificate Checklist.xlsx file
+2. Run certmanager.py
+3. Ensure your certificate attributres are correct either from within the app, or editing the script to change the default settings
+4. Generate CSRs by selecting option <b>3</b>.  You can leave the script running or close it when done
+5. A directory is created for each server.  Each directory contains a key file and a CSR.
+6. Have your CA sign your CSRs and place the signed certificate in its corresponding directory
+7. Run certmanager.py and select option <b>4</b> to create your pfx files
+8. Import your pfx files 
+
+
 Modify the included xlsx file SNA Certificate Checklist.xlsx. Fill out column A with your hostnames and column B with your IP addresses.  This will populate the certificate CN and SAN Fields.
  
  <img src="images/cert spreadsheet.PNG" alt="Source Spreadsheet">
@@ -165,8 +176,8 @@ Launch certmanager.py.  You will be granted with a text based interface that wil
 You can set certificate attributes.  If you wish to modify the default set, edit the csr_data dictionary in csrcreator.py.  You also can't directly edit the CN or Key attributes.  The key is defaulted to 4096.
 
 <h3>Set Source Excel Spreadsheet</h3>
-[COMING SOON] The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
-<b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program. 
+ The source excel spreadsheet is simply an excel spreadsheet used as a checklist for certificate activities on a distributed Cisco Secure Network Analytics deployment.
+<b>It can be modified for your use as long as the hostnames are in column A.</b>  Row 1 is a header and will not be read into the program.
 
 
 <h3>Generate CSR's</h3>
@@ -202,9 +213,11 @@ I'm not sure what this does, but I hope it's not dangerous.
 
 - [x] Use Excel checklist to import host list
 - [ ] Include a script for automatically signing CSR's from AD based Certificate Authority
-- [ ] Allow a user to set their own source spreadsheet
+- [x] Allow a user to set their own source spreadsheet
 - [x] Allow for the addition of SAN fields and other attributes in CSR
 - [ ] GUI
+- [ ] Improved error handling
+
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
 
