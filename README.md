@@ -226,6 +226,7 @@ See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a ful
 
 
 <!-- CONTRIBUTING -->
+  <!--
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -242,7 +243,7 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
+-->
 <!-- LICENSE -->
 ## License
 
