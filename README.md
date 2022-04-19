@@ -186,6 +186,9 @@ Each directory will hold the CSR file and the Key file.
 <b>Important! </b>ensure that the signed PEM files are Base 64 encoded.
 <i>Note:</i> The script will create a json file that will store path and hostname data to account for the time taken to get the certificates signed.  Please don't delete this file till you no longer need it.  It is saved in the root path for the application and will be named csr_list_[DATE].json
 
+  <b>A note about certificate EKUs</b>
+  Ensure you're using the correct EKU's.  Cisco SNA requires Client and Server EKUs.
+  
 <b>The CSR's will be created with the following fields:</b>
  - CN: Appliance FQDN
  - SAN: Appliance FQDN
