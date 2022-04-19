@@ -85,7 +85,7 @@
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `gobblegoob`, `CSRCreator`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `CSR Creator`, `project_description`-->
-This project was initially created to reduce clicking on large Cisco SNA deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
+This project was initially created to reduce clicking on large Cisco SNA (formerly Stealthwatch) deployments, but it can be used to batch create CSR's and create PKCS12 certificates for import for any purpose.
 
 Given it was originally created for a Cisco SNA deployment, the source .xlsx file included also includes a checklist to track activities completed with each SNA cluster member.   Feel free to modify any column other than Column A or B.  SNA's identity certs are generated with a SAN field containing the DNS name of the appliance and a SAN field with the IP Address of the appliance.
 
