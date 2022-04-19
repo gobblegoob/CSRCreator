@@ -263,6 +263,7 @@ Project Link: [https://github.com/gobblegoob/CSRCreator](https://github.com/gobb
 
 
 <!-- ACKNOWLEDGMENTS -->
+<!--
 ## Acknowledgments
 
 * []()
@@ -270,7 +271,7 @@ Project Link: [https://github.com/gobblegoob/CSRCreator](https://github.com/gobb
 * []()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
+-->
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
