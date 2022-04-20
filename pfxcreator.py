@@ -204,7 +204,7 @@ class PFXCreator():
             i = 0
             while i < CERT_LIST.__len__():
                 pkey = CERT_LIST[i]["keyfile"]
-                csr = CERT_LIST[i]["csrfile"] # Not not needed since we need the signed certs
+                csr = CERT_LIST[i]["csrfile"] # Not needed since we need the signed certs
                 host = CERT_LIST[i]["hostname"]
       
                 os.chdir(host)

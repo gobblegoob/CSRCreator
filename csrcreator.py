@@ -59,9 +59,12 @@ class CSRCreator():
 
     def create_dir(self, name):
         try:
-            print(f'{Fore.GREEN}{Style.BRIGHT} Creating directory {name}')
-            os.mkdir(name)
-            return
+            if name is not None:
+                print(f'{Fore.GREEN}{Style.BRIGHT} Creating directory {name}')
+                os.mkdir(name)
+                return
+            else:
+                return
         except FileExistsError:
             print(f'{Fore.RED}{Style.BRIGHT}Directory {name} already exists')
             return
@@ -122,20 +125,23 @@ class CSRCreator():
 
     def cert_request(self, hostname, subjectAltName):
         # create new dir
-        os.chdir(self.HOMEDIR)
-        print(os.getcwd())
-        self.create_dir(hostname)
-        os.chdir(hostname)
-        keypath = os.getcwd() + '/' + hostname + '_' + str(d) + '.key'
-        print(f'Keypath is: {keypath}')
+        if hostname is not None:
+            os.chdir(self.HOMEDIR)
+            print(os.getcwd())
+            self.create_dir(hostname)
+            os.chdir(hostname)
+            keypath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.key'
+            print(f'Keypath is: {keypath}')
     
-        # Generate Key
-        self.generatekey(keypath)
+            # Generate Key
+            self.generatekey(keypath)
     
-        # Create CSR
-        csrpath = os.getcwd() + '/' + hostname + '_' + str(d) + '.csr'
-        self.create_csr(csrpath, subjectAltName)
-        self.CERT_LIST.append({'hostname': hostname, 'keyfile': keypath, 'csrfile': csrpath})
+            # Create CSR
+            csrpath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.csr'
+            self.create_csr(csrpath, subjectAltName)
+            self.CERT_LIST.append({'hostname': hostname, 'keyfile': keypath, 'csrfile': csrpath})
+        else:
+            return
 
 
     def csr_hosts(self):
@@ -166,11 +172,16 @@ class CSRCreator():
 
 
     def output_csr_list(self):
-        os.chdir(self.HOMEDIR)
-        csr_json_file = 'csr_list_' + str(d) + '.json'
-        csr_json_data  = json.dumps(self.CERT_LIST)
-        with open(csr_json_file, 'w') as csrfile:
-            csrfile.write(csr_json_data)
+        try:
+            os.chdir(self.HOMEDIR)
+            csr_json_file = 'csr_list_' + str(d) + '.json'
+            csr_json_data  = json.dumps(self.CERT_LIST)
+            with open(csr_json_file, 'w') as csrfile:
+                csrfile.write(csr_json_data)
+            return
+        except Exception as e:
+            print(f'Error creating CSR list json file.  Quitting. \n{e}')
+            quit()
 
 
 if __name__ == '__main__':
