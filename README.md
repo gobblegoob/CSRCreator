@@ -162,7 +162,7 @@ In brief:
 5. A directory is created for each server.  Each directory contains a key file and a CSR.
 6. Have your CA sign your CSRs and place the signed certificate in its corresponding directory
 7. Run certmanager.py and select option <b>4</b> to create your pfx files
-8. Import your pfx files 
+8. Import your pfx files - Default passphrase is password123
 
 
 Modify the included xlsx file SNA Certificate Checklist.xlsx. Fill out column A with your hostnames and column B with your IP addresses.  This will populate the certificate CN and SAN Fields.
@@ -210,8 +210,21 @@ I'm not sure what this does, but I hope it's not dangerous.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Editing Defaults
+  There are a couple defaults you might want to edit.
+ 
+  <h3>Certificate Attributes</h3>
+  <p>The certificate attributes in the CN field will need to be updated.  If you wish to alter the defaults so you don't have to change them every time you launch the application, you can do that by modifying the following:</p>
+  <b>csrcreator.py</b><br>
+  <p>The csr_data dictionary in the __init__() function hosts the default data.  Modify as needed.</p>
+  <img src="images/certattributes.PNG">
 
-
+  <h3>PKCS12 Decryption Passphrase</h3>
+  <p>The pkcs12 file you get signed will be encrypted with a passphrase.  The default is <i>password123</i>.  If you wish to change the default passphrase, you an do so by modifying the following:</p>
+  <b>pfxcreator.py</b><br>
+  <p>The passphrase variable in the generate_pkcs12() function.  You can search for it.  Note, it must be in bits.</p>
+  <img src="images/passphrase.PNG">
+  
 <!-- ROADMAP -->
 ## Roadmap
 
