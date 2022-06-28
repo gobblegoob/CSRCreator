@@ -234,8 +234,8 @@ I'm not sure what this does, but I hope it's not dangerous.
 - [x] Allow for the addition of SAN fields and other attributes in CSR
 - [ ] GUI
 - [ ] Improved error handling
-- [ ] Validate Certs on SNA Appliances via API calls
-- [ ] Install certs into trust stores
+- [ ] Support for Elliptic Curve Certificates
+
 
 
 See the [open issues](https://github.com/gobblegoob/CSRCreator/issues) for a full list of proposed features (and known issues).
