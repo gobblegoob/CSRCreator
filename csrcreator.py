@@ -130,14 +130,14 @@ class CSRCreator():
             print(os.getcwd())
             self.create_dir(hostname)
             os.chdir(hostname)
-            keypath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.key'
+            keypath = os.getcwd() + '/' + hostname + '_' + str(d) + '.key'
             print(f'Keypath is: {keypath}')
     
             # Generate Key
             self.generatekey(keypath)
     
             # Create CSR
-            csrpath = os.getcwd() + '\\' + hostname + '_' + str(d) + '.csr'
+            csrpath = os.getcwd() + '/' + hostname + '_' + str(d) + '.csr'
             self.create_csr(csrpath, subjectAltName)
             self.CERT_LIST.append({'hostname': hostname, 'keyfile': keypath, 'csrfile': csrpath})
         else:
