@@ -162,7 +162,7 @@ In brief:
 5. A directory is created for each server.  Each directory contains a key file and a CSR.
 6. Have your CA sign your CSRs and place the signed certificate in its corresponding directory
 7. Run certmanager.py and select option <b>4</b> to create your pfx files
-8. Import your pfx files - Default passphrase is password123
+8. Import your pfx files - Default passphrase is Password123
 
 
 Modify the included xlsx file SNA Certificate Checklist.xlsx. Fill out column A with your hostnames and column B with your IP addresses.  This will populate the certificate CN and SAN Fields.
