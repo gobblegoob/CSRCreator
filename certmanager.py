@@ -145,13 +145,22 @@ def generate_csrs():
 def create_pkcs12s():
     # invoke pfxcreator.py object to create our pkcs12 certificates
     
+    # TAGGED FOR DELETION
+    '''
     # Identify json source file
     source_file = pfxc.find_cert_list_file()
     # Load the json file as an array of dicts
     cl = pfxc.read_cert_list_file(source_file)
+    '''
+    pfxc.cert_list_data = pfxc.read_cert_list_file(pfxc.find_cert_list_file())
+    # For updated pfxcreator.py 2.0
+    # The function now expects a passphrase.
+    pfxc.process_all_certs('Password123')
+    #TAGGED FOR DELETION
+    '''
     # start parsing json and creating certs
     pfxc.parse_certs(cl)
-    
+    '''
     print_menu()
     navigate_menu()
 
